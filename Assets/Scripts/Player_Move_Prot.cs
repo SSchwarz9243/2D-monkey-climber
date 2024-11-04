@@ -11,25 +11,21 @@ public class Player_Move_Prot : MonoBehaviour
     public bool isGrounded;
     public float distanceToBottomOfPlayer = 0.9f;
     private Rigidbody2D rb;
-    private const float defaultGravityScale = 8f; // Permanent gravity scale value
+    private const float defaultGravityScale = 7f; 
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 8; // Force the gravity scale to 8 at the start of the game
-        Debug.Log("Gravity scale set to: " + rb.gravityScale); // Log for verification
+        rb.gravityScale = 7;
+        // Debug.Log("Gravity scale set to: " + rb.gravityScale);
     }
 
 
     void Update() {
-    // Prevent movement if the game is over
         if (GameOverManager.isGameOver) {
-            rb.velocity = Vector2.zero; // Stop the player from moving
-            return; // Exit the Update function to prevent further movement
+            rb.velocity = Vector2.zero; 
+            return; 
         }
-
-        // Optionally, move the Debug.Log statement here if you still need it
        // Debug.Log("Current Gravity Scale: " + rb.gravityScale);
-
         PlayerMove();
         playerRaycast();
     }
@@ -38,19 +34,14 @@ public class Player_Move_Prot : MonoBehaviour
     void PlayerMove() {
         moveX = Input.GetAxis("Horizontal");
 
-        // Jumping logic
         if (Input.GetButtonDown("Jump") && isGrounded) {
             Jump();
         }
-
-        // Check for facing direction and flip if needed
         if (moveX > 0 && !facingRight) {
             FlipPlayer();
         } else if (moveX < 0 && facingRight) {
             FlipPlayer();
         }
-
-        // Move the player
         rb.velocity = new Vector2(moveX * playerSpeed, rb.velocity.y);
     }
 

@@ -1,13 +1,13 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required for scene loading
+using UnityEngine.SceneManagement; 
 
 public class FinishLine : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Ensure the player has the tag "Player"
+        if (other.CompareTag("Player")) 
         {
-            Debug.Log("Player reached the finish line!");
+           // Debug.Log("Player reached the finish line!");
             LoadNextLevel();
         }
     }
@@ -17,16 +17,16 @@ public class FinishLine : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
-        // Check if there is a next scene in the build settings
+        
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {
-            // No more levels, return to the main menu
-            Debug.Log("No more levels available. Returning to main menu.");
-            SceneManager.LoadScene("MainMenu"); // Load the main menu scene
+            
+            // Debug.Log("No more levels available. Returning to main menu.");
+            SceneManager.LoadScene("MainMenu"); 
         }
     }
 }

@@ -9,10 +9,9 @@ public class PlayerScore : MonoBehaviour {
     public int playerScore = 0;
     public TMP_Text timeLeftUI;
     public TMP_Text playerScoreUI;
-    public string levelName; // Set this in the Inspector as "Main" or "UnderWater"
+    public string levelName; 
 
     void Start() {
-        // Retrieve the previous total score if it exists
         playerScore = PlayerPrefs.GetInt("TotalScore", 0);
     }
 
@@ -23,7 +22,7 @@ public class PlayerScore : MonoBehaviour {
 
         if (timeLeft < 0.1f) {
             SaveLevelScore();
-            SceneManager.LoadScene("EndGame"); // Load the end game scene when time runs out
+            SceneManager.LoadScene("EndGame");
         }
     }
 
@@ -35,19 +34,19 @@ public class PlayerScore : MonoBehaviour {
     }
 
     void CountScore() {
-        playerScore += 10; // Adjust as needed
-        Debug.Log("Score updated: " + playerScore);
+        playerScore += 10;
+       // Debug.Log("Score updated: " + playerScore);
     }
 
     void SaveLevelScore() {
-        // Add the current level's score to the total score
+ 
         int totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         totalScore += playerScore;
         PlayerPrefs.SetInt("TotalScore", totalScore);
-        PlayerPrefs.Save(); // Ensure the data is persisted
+        PlayerPrefs.Save();
 
-        Debug.Log("Saved " + levelName + " Score: " + playerScore);
-        Debug.Log("Updated Total Score: " + totalScore);
+        // Debug.Log("Saved " + levelName + " Score: " + playerScore);
+        // Debug.Log("Updated Total Score: " + totalScore);
     }
 }
 
